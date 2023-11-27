@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD App</title>
+</head>
+<script src="script.js"></script>
+<style>
+    form{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    form *{
+        width: 50%;
+        margin-top: 2px;
+    }
+    .update{
+        display: none;
+    }
+</style>
+<body>
+
+    <form>
+        <input type="text" placeholder="Name">
+        <input type="email" placeholder="Email">
+        <input type="tel" placeholder="Phone">
+        <input type="text" placeholder="Address">
+        <button type="button" class="submit"> Submit Data</button>
+        <button type="button" class="update"> Update Data</button>
+        <button type="button" class="delete"> Delete Data</button>
+
+
+
+    </form>
+    <!-- // now i want to display my data in table form  -->
+    <!-- then we will make here a table  -->
+    <table>
+        <head>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </head>
+    </table>
+     
+</body>
+</html>
