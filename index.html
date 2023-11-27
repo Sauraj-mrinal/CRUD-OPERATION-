@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add course page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+   
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">Navbar</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                  <a class="nav-link active" aria-current="page" href="#">Home</a>
+                  <a class="nav-link" href="#">Features</a>
+                  <a class="nav-link" href="#">Pricing</a>
+                  <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                </div>
+              </div>
+            </div>
+          </nav>
+    </header>
+    <h4 class="container mt-13">CRUD</h4>
+    <main>
+        <div class="container mt-5">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+            <button id="add_btn" class="btn btn-outline-success" type="button" id="button-addon1">Add</button>
+          
+         
+            
+        </div> 
+        <!-- // so to add this into dome we will first select it and then add it into its child   -->
+        <ul id="parentList" class="list-group">
+            <li class="list-group-item d-flex justify-content-between" >
+                
+                <h4 class=" flex-grow-1">chapter 1 </h4>
+                
+                <button class="btn btn-warning mx-3">Edit</button>
+                <button class="btn btn-danger" onclick="removeChapter(this)"> Remove</button>
+            
+            </li>
+    
+          </ul>
+     </div>
+    </main>
+
+    <script>
+        // so here we will add one event on add button 
+        // first we will select add button then add event on add button
+
+        // select 
+        let addBtn = document.getElementById('add_btn');
+        // event listener adding 
+        addBtn.addEventListener('click',addChapter)
+        function addChapter(e){
+            console.log(e);
+            // so now i want to add the item which is written in form
+            // so how we will add 
+            // first we will store the text which i write in form
+
+            let currentBtn = e.currentTarget;
+            // now we can take privious element
+
+            let currentInput = currentBtn.previousElementSibling;
+
+           console.log(currentInput.value); // here we can see what we have to write here as a input 
+       
+
+           // now i want to add the item which is written in form in given bellow box 
+            //    so what will be the process 
+
+
+           let newLi = document.createElement('li');// it is good way to  add the item 
+        //    newLi.classList.add('list-group-item')// for better styling 
+
+           newLi.className = "list-group-item d-flex justify-content-between";
+
+        //    newLi.textContent  = currentInput.value;// new li me current input ki value rakhk denge 
+           // but still we are not interested this element into my dom  
+           // the what we can do for 
+           //go to line number -->  39 and write
+         //--------------------------------  
+        //    or we can write like 
+        //---------------------------------
+        // newLi.innerHTML  = `<h4 class=" flex-grow-1">chapter 1 </h4> // but here chapter name is not same  
+        //         <button class="btn btn-warning mx-3">Edit</button>
+        //         <button class="btn btn-danger"> Remove</button>` 
+
+          let currentChapterName = currentInput.value;
+          newLi.innerHTML  = `<h4 class=" flex-grow-1">${ currentChapterName} </h4>   
+                <button class="btn btn-warning mx-3">Edit</button>
+                <button class="btn btn-danger" > Remove</button>` 
+
+           // in 39 line we have make its a unique id 
+        //    parentList
+        let parentList = document.getElementById('parentList');
+        parentList.appendChild(newLi);//we pass here child
+
+
+
+        //-------------------------------------------------------------
+        //                          remove
+        //-------------------------------------------------------------
+       function removeChapter(currElement){
+           console.log(currElement.parentElement);
+           currElement.parentElement.remove();
+
+           
+
+       }
+
+
+
+
+
+        }
+    </script>
+</body>
+</html>
