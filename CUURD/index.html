@@ -42,8 +42,8 @@
                 
                 <h4 class=" flex-grow-1">chapter 1 </h4>
                 
-                <button class="btn btn-warning mx-3">Edit</button>
-                <button class="btn btn-danger"> Remove</button>
+                <button class="btn btn-warning mx-3" onclick="edditChapter(this)">Edit</button>
+                <button class="btn btn-danger" onclick="removeChapter(this)">Remove</button>
             
             </li>
     
@@ -59,12 +59,19 @@
         let addBtn = document.getElementById('add_btn');
         // event listener adding 
         addBtn.addEventListener('click',addChapter)
+        let parentList = document.getElementById('parentList');
         function addChapter(e){
-            console.log(e);
+            //console.log(e);
             // so now i want to add the item which is written in form
             // so how we will add 
             // first we will store the text which i write in form
+              
 
+            //----------------------------------------------------------------
+           
+             if(parentList.children[0].className =="emptyMsg"){
+                parentList.children[0].remove();
+             }
             let currentBtn = e.currentTarget;
             // now we can take privious element
 
@@ -94,22 +101,69 @@
         //         <button class="btn btn-danger"> Remove</button>` 
 
           let currentChapterName = currentInput.value;
-        newLi.innerHTML  = `<h4 class=" flex-grow-1">${ currentChapterName} </h4>   
+          newLi.innerHTML  = `<h4 class=" flex-grow-1">${ currentChapterName} </h4>   
                 <button class="btn btn-warning mx-3">Edit</button>
-                <button class="btn btn-danger"> Remove</button>` 
+                <button class="btn btn-danger" onclick="removeChapter(this)" > Remove</button>` 
 
            // in 39 line we have make its a unique id 
         //    parentList
-        let parentList = document.getElementById('parentList');
-        parentList.appendChild(newLi);//we pass here child 
+      //  let parentList = document.getElementById('parentList');
+        parentList.appendChild(newLi);//we pass here child
 
+        }
 
         //-------------------------------------------------------------
         //                          remove
         //-------------------------------------------------------------
+        function removeChapter(currentElement){
+           //console.log(Element.parentElement);
+           currentElement.parentElement.remove()  
+          let parentList = document.getElementById('parentList');
+          if(parentList.children.length<=0){
+            let newEmptyMsg = document.createElement("h4")
 
-
+            newEmptyMsg.classList.add("emptyMsg");
+            newEmptyMsg.textContent = "Nothing is here to delete , please add then delete ";
+            parentList.appendChild(newEmptyMsg)
+          }
         }
+          //-----------------------------------------------------------------
+          //                                 EDIT 
+          //----------------------------------------------------------------
+         
+
+       function edditChapter(currentElement){
+             if(currentElement.textContent=="Done"){
+                // we write logic for save 
+                currentElement.textContent = "Edit";
+                let currentChapterName = currentElement.previousElementSibling.value;
+                let currentHeading = document.createElement('h4')
+                currentHeading.className = "flex-grow-1"
+                currentHeading.textContent = currentChapterName;
+                currentElement.parentElement.replaceChild(currentHeading , currentElement.previousElementSibling)
+             }else{
+              currentElement.textContent = "Done";
+              console.log(currentElement.previousElementSibling);
+              let currentChapterName = currentElement.previousElementSibling.textContent;
+
+              // element creatation 
+              let currentInput = document.createElement('input');
+              currentInput.type = "text";
+              currentInput.placeholder = "chapter name "
+              currentInput.className = "form-control";
+              currentElement.value = currentChapterName;
+              // nnow we have to add it into dome 
+              currentElement.parentElement.replaceChild(currentInput , currentElement.previousElementSibling)
+          }
+        }
+
     </script>
+
+<div class="card text-center">
+    <div class="card-header">
+    <div class="card-footer text-body-secondary">
+      Mrinal Sauraj
+    </div>
+  </div>
 </body>
 </html>
